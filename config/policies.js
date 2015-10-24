@@ -18,10 +18,10 @@
 
 
 module.exports.policies = {
-'*': [ 'passport', /* your auth dependant policies go here */ ],
+'*': [ 'passport'/* your auth dependant policies go here */ ],
 'auth': {
     '*': ['passport']
-  }
+  },
   /***************************************************************************
   *                                                                          *
   * Default policy for all controllers and actions (`true` allows public     *
@@ -29,7 +29,6 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
 
   /***************************************************************************
   *                                                                          *

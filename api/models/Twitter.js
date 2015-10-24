@@ -8,7 +8,15 @@
 module.exports = {
 
   attributes: {
- 
+
+  	profile_image_url  : { 
+  		type: 'string'
+  	},
+ 	getTwitterAvatar: function (){
+  	  var s = this.profile_image_url;
+  	  s = s.substring(0, s.indexOf('_normal'));
+      return s+'.jpg';
+    },
   }
 };
 

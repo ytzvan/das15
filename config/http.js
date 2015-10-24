@@ -11,6 +11,18 @@
 
 module.exports.http = {
 
+    customMiddleware: function(app){
+        app.use(function(req, res, next){
+            // or whatever query you need
+            Twitter.find().
+            exec(function(err, twitter){
+                res.locals.twitter = twitter;
+                next();
+            });
+        });
+    }
+
+
   /****************************************************************************
   *                                                                           *
   * Express middleware to use for every Sails request. To add custom          *

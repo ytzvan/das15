@@ -44,6 +44,7 @@ module.exports = {
 		       res.redirect('/access');
 		    } else {
 
+
 		        //accessToken and accessTokenSecret can now be used to make api-calls (not yet implemented) 
 		        //data contains the user-data described in the official Twitter-API-docs 
 		        //you could e.g. display his screen_name 
@@ -53,7 +54,6 @@ module.exports = {
 					  //Create Logic
 					Twitter.create(data)
 			        	.exec(function createCB(err, created){ //Clone records in our sails model
-						  console.log("created Twitter Current User");
 					});
 	            	
 				}); //End CB Destroy
