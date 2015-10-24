@@ -33,6 +33,12 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': 'DenunciasController.home',
+  'get /login': {
+    view: 'login',
+    locals: {
+      layout: 'login'
+    }
+  },
   '/menciones': 'TwitterController.listMentions',
 
   '/access': 'TwitterController.getUser',
@@ -57,7 +63,7 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-'get /login': 'AuthController.login',
+//'get /login': 'AuthController.login',
 'get /logout': 'AuthController.logout',
 'get /register': 'AuthController.register',
  

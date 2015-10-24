@@ -86,6 +86,7 @@ module.exports = {
 					Timeline.create(data)
 			        	.exec(function createCB(err, created){ //Clone records in our sails model
 						  console.log("created");
+						  console.log(created[0].coordinates.type);
 						  return  res.redirect('/menciones');
 					});
 	            	

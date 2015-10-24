@@ -56,6 +56,10 @@ module.exports = {
 			});
 		},
 
+	login : function (req, res) {
+		return  res.view('login');
+	},	
+
 
 	home : function (req, res) {
 		var homeData = {};
