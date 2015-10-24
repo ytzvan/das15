@@ -1,0 +1,42 @@
+<!-- Small boxes (Stat box) -->
+      <%- partial ('components/status.ejs') %>
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+          <%- partial ('components/sales-chart.ejs') %>
+          <!-- /.nav-tabs-custom -->
+
+          <!-- Chat box -->
+         <%- partial ('components/chat-box.ejs') %>
+
+          <!-- TO DO List -->
+          <%- partial ('components/todo-list.ejs') %>
+          <!-- /.box -->
+
+          <!-- quick email widget -->
+          <%- partial ('components/email.ejs') %>
+
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+
+          <!-- Map box -->
+          <%- partial ('components/visitors-map.ejs') %>
+          <!-- /.box -->
+
+          <!-- solid sales graph -->
+          
+          <!-- /.box -->
+          <%- partial ('components/sales-graph.ejs') %>
+          <!-- Calendar -->
+          <%- partial ('components/calendar.ejs') %>
+          <!-- /.box -->
+
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->

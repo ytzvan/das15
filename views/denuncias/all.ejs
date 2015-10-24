@@ -1,0 +1,60 @@
+ <!-- DataTables -->
+  <link rel="stylesheet" href="/das15/plugins/datatables/dataTables.bootstrap.css">
+<div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Denuncias</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Reportado Por</th>
+                  <th>Fecha</th>
+                  <th>Estado</th>
+                  <th>Denuncia</th>
+                  <th>Categoria</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for (denuncias in d) { %>
+                <tr>
+                  <td><a href="/denuncias/<%= d[denuncias].id %>"><%= d[denuncias].id %></a></td>
+                  <td><%= d[denuncias].reporterName %> (<a href="http://twitter.com/<%= d[denuncias].reporterHandle %>" target="_blank">@<%= d[denuncias].reporterHandle %>)</a></td>
+                  <td><a href="http://twitter.com/<%= d[denuncias].reporterHandle %>/status/<%= d[denuncias].TweetID_str %>" target="_blank"><%= d[denuncias].date %></td>
+                  <td><%- d[denuncias].getStatusName() %></td>
+                  <td><%= d[denuncias].text %></td>
+                  <td><%- d[denuncias].getCategoryName() %></td>   
+                </tr>
+                <% } %>  
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>ID</th>
+                  <th>User</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Reason</th>
+                  <th>Categoria</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+<script>
+  $(function () {
+    $("#example2").DataTable();
+    $('#example1').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": false,
+      "autoWidth": false
+    });
+  });
+</script>
+
