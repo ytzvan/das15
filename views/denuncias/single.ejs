@@ -4,7 +4,7 @@
             <div class="box-header with-border">
               <div class="user-block">
                 <img class="img-circle" src="<%= d.getTwitterAvatar() %>" alt="User Image">
-                <span class="username"><a href="#"><%= d.reporterName %></a></span>
+                <span class="username"><a href="#"><%= d.reporterName %></a> - <%- d.getCategoryName() %> - <%- d.getStatusName() %></span>
                 <span class="description">Denuncia Via Twitter - <%= d.date %></span>
               </div>
               <!-- /.user-block -->
@@ -17,7 +17,8 @@
               <!-- post text -->
               <p><%= d.text %></p>
 
-              <p><%- d.getCategoryName() %></p>
+              <p></p>
+              <p></p>
 
               <%if (d.TweetPhoto !== null) { %>
                 <img class="img-responsive pad" src="<%- d.TweetPhoto %>" alt="Photo">
@@ -27,52 +28,80 @@
               <!-- /.attachment-block -->
 
               <!-- Social sharing buttons -->
-              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-              <span class="pull-right text-muted">45 likes - 2 comments</span>
+              <%if (d.Comentarios) { %>
+              <div class="row">
+	              <div class="col-xs-2">
+	              	<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Compartir</button>
+	              </div>
+	              <div class="col-xs-2">
+	              	<button type="button" class="btn btn-default btn-xs"><i class="fa fa-heart"></i> Favorito</button>
+	              </div>
+	              <div class="col-xs-2">
+		              <form method="POST" action="/update/denuncias/<%- d.id %>">
+		              
+		              <input type="hidden" class="form-control input-sm" value="1" name="status" >
+		              <input type="hidden" class="form-control input-sm" value="<%- d.id %>" name="id" >
+		              <button type="submit" class="btn btn-success btn-xs"> Abierta</button>
+		              </form>
+		            </div>
+		            <div class="col-xs-2">
+	              <form method="POST" action="/update/denuncias/<%- d.id %>">
+	              
+	              <input type="hidden" class="form-control input-sm" value="2" name="status" >
+	              <input type="hidden" class="form-control input-sm" value="<%- d.id %>" name="id" >
+	              <button type="submit" class="btn btn-warning btn-xs"> En Progreso</button>
+	              </form></div>
+	              <div class="col-xs-2">
+	              <form method="POST" action="/update/denuncias/<%- d.id %>">
+	              
+	              <input type="hidden" class="form-control input-sm" value="3" name="status" >
+	              <input type="hidden" class="form-control input-sm" value="<%- d.id %>" name="id" >
+	              <button type="submit" class="btn btn-primary btn-xs bg-primary"> Cerrada</button>
+	              </form></div>
+	              <div class="col-xs-2">
+	              <form method="POST" action="/update/denuncias/<%- d.id %>">
+	              
+	              <input type="hidden" class="form-control input-sm" value="4" name="status" >
+	              <input type="hidden" class="form-control input-sm" value="<%- d.id %>" name="id" >
+	              <button type="submit" class="btn btn-danger btn-xs bg-danger´pull-right"> No Aceptada</button>
+	              </form></div>
+              </div>
+              <span class="pull-right text-muted"><%= d.Comentarios.length %> comentarios</span>
+
             </div>
             <!-- /.box-body -->
+             
+             <% for ( var comentarios=0; comentarios < d.Comentarios.length; comentarios++) { %>
             <div class="box-footer box-comments">
               <div class="box-comment">
                 <!-- User image -->
-                <img class="img-circle img-sm" src="/das15/dist/img/user3-128x128.jpg" alt="User Image">
+                <img class="img-circle img-sm" src="<%= d.Comentarios[comentarios].photo %>" alt="User Image">
 
                 <div class="comment-text">
                       <span class="username">
-                        Maria Gonzales
-                        <span class="text-muted pull-right">8:03 PM Today</span>
+                        <%= d.Comentarios[comentarios].user %>
+                        <span class="text-muted pull-right"><%= d.Comentarios[comentarios].createdAt %></span>
                       </span><!-- /.username -->
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
+                  <%= d.Comentarios[comentarios].comment %>
                 </div>
                 <!-- /.comment-text -->
               </div>
               <!-- /.box-comment -->
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="<%= d.reporterPicture %>" alt="User Image">
-
-                <div class="comment-text">
-                      <span class="username">
-                        Nora Havisham
-                        <span class="text-muted pull-right">8:03 PM Today</span>
-                      </span><!-- /.username -->
-                  The point of using Lorem Ipsum is that it has a more-or-less
-                  normal distribution of letters, as opposed to using
-                  'Content here, content here', making it look like readable English.
-                </div>
-                <!-- /.comment-text -->
-              </div>
               <!-- /.box-comment -->
             </div>
+            <% } %> 
+            <% } %>  
             <!-- /.box-footer -->
             <div class="box-footer">
-              <form action="#" method="post">
-                <img class="img-responsive img-circle img-sm" src="/das15/dist/img/user4-128x128.jpg" alt="Alt Text">
+              <form action="/comentarios/add" method="POST">
+                <img class="img-responsive img-circle img-sm" src="<%= d.reporterPicture %>" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
-                  <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                  <input type="text" class="form-control input-sm" placeholder="Escriba su comentario y presione Enter para enviar" name="comment" >
                 </div>
+                <input type="hidden" class="form-control input-sm" placeholder="Escriba su comentario y presione Enter para enviar" value="<%= d.reporterName %>" name="user" >
+                <input type="hidden" class="form-control input-sm" placeholder="Escriba su comentario y presione Enter para enviar" value="<%= d.reporterPicture %>" name="photo" >
+                <input type="hidden" class="form-control input-sm" placeholder="Escriba su comentario y presione Enter para enviar" value="<%= d.id %>" name="denuncias" >
               </form>
             </div>
             <!-- /.box-footer -->

@@ -32,9 +32,7 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'index2'
-  },
+  '/': 'DenunciasController.home',
   '/menciones': 'TwitterController.listMentions',
 
   '/access': 'TwitterController.getUser',
@@ -44,6 +42,11 @@ module.exports.routes = {
   'POST /denuncias/add' : 'DenunciasController.add',
   '/denuncias' : 'DenunciasController.list',
   '/denuncias/:id' : 'DenunciasController.single',
+  'POST /update/denuncias/:id' : 'DenunciasController.updateStatus',
+
+
+  //Comentarios
+  'POST /comentarios/add': 'ComentariosController.add',
 
   /***************************************************************************
   *                                                                          *

@@ -60,6 +60,11 @@ module.exports = {
   		type : 'string',
   		defaultsTo: 'https://usuarioraiz.files.wordpress.com/2010/02/theme_ntp_background.png'
   	},
+
+  	Comentarios:{
+      collection: 'comentarios',
+      via: 'denuncias'
+    },
   	
   	getTwitterAvatar: function (){
   	  var s = this.reporterPicture;

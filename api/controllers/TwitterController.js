@@ -47,6 +47,17 @@ module.exports = {
 		        //accessToken and accessTokenSecret can now be used to make api-calls (not yet implemented) 
 		        //data contains the user-data described in the official Twitter-API-docs 
 		        //you could e.g. display his screen_name 
+		        Twitter.destroy({})
+		        	.exec(function createCB(err, created){ //Clone records in our sails model
+					  console.log("destroy TWITTER CURRENT USER");
+					  //Create Logic
+					Twitter.create(data)
+			        	.exec(function createCB(err, created){ //Clone records in our sails model
+						  console.log("created Twitter Current User");
+					});
+	            	
+				}); //End CB Destroy
+
 		        res.redirect('/getMentions');
 		    }
 		});
@@ -67,18 +78,27 @@ module.exports = {
 	        if (error) {
 	           console.log(error);
 	        } else {
-	        	Timeline.create(data)
-	        	.exec(function createCB(err, created){ //Clone records in our sails model
-				  console.log(created);
-				});
-	            return  res.redirect('/menciones')
-			    };
+	        	//Destroy Logic
+	        	Timeline.destroy({})
+		        	.exec(function createCB(err, created){ //Clone records in our sails model
+					  console.log("destroy");
+					  //Create Logic
+					Timeline.create(data)
+			        	.exec(function createCB(err, created){ //Clone records in our sails model
+						  console.log("created");
+						  return  res.redirect('/menciones');
+					});
+	            	
+				}); //End CB Destroy
+
+
+
+			}; //end ELSE 
 	    });
 
 	},
 
 	listMentions : function (req , res){
-		console.log('loaded local tweets');
 		Timeline.find()
 	        .exec(function timelineCB(err, data){ //Clone records in our sails model
 				return  res.view('menciones/all',{
